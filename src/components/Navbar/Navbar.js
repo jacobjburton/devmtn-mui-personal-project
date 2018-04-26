@@ -6,44 +6,34 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-router-dom';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
-//import Login from '../Login/Login';
 import FlatButton from 'material-ui/FlatButton';
+import { connect } from 'react-redux';
+import { getUser } from '../../redux/reducer';
 
 
 
 
 class Navbar extends React.Component
 {
-    constructor()
-    {
-        super();
-
-        this.state =
-        {
-            loggedIn: false
-        }
-        this.logoutClick = this.logoutClick.bind(this);
-        this.loginClick = this.loginClick.bind(this);
-    }
-
-    static muiName = 'FlatButton';
-
-    logoutClick() 
-    {
-        this.setState({ loggedIn: false });
-    }
     
-    loginClick()
+    componentDidMount()
     {
-        this.setState({ loggedIn: true });
+        this.props.getUser();  
     }
 
     render()
     {
-        
-        let loggedInDisplay = this.state.loggedIn ? 
-            <FlatButton onClick={this.logoutClick} label="Logout" className="button"/>
-            : <FlatButton onClick={this.loginClick} label="Login" className="button"/>;
+        //console.log(this.props.user);
+        let loggedInDisplay = this.props.user ? 
+            <FlatButton                  
+                href={process.env.REACT_APP_LOGOUT}
+                label="Logout" className="button"
+            />
+            :
+            <FlatButton
+                href={process.env.REACT_APP_LOGIN}
+                label="Login" className="button"
+            />;
         
         return (
             <div className="Navbar">
@@ -56,7 +46,6 @@ class Navbar extends React.Component
                             {loggedInDisplay}
                         </div>
                     }
-                    // iconClassNameRight="navigation-menu"
                     iconElementLeft={
                         <IconMenu
                             iconButtonElement={<IconButton><NavigationMenu /></IconButton>}
@@ -78,20 +67,21 @@ class Navbar extends React.Component
                                     Time Standards
                                 </Link>
                             </MenuItem>
-                            {/* <MenuItem>
-                                <Link to='/' className="linkText">Logout</Link>
-                            </MenuItem> */}
                         </IconMenu>
                     }
-
                 >
-                    
-
                 </AppBar>
             </div>
         )
     }
 }
 
+function mapStateToProps(state)
+{
+    return (
+    {
+        user: state.user
+    });
+}
 
-export default Navbar;
+export default connect(mapStateToProps, { getUser })(Navbar);

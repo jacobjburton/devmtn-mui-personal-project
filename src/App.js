@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import './App.css';
 import routes from './routes';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 class App extends Component 
 {
@@ -18,4 +20,4 @@ class App extends Component
   }
 }
 
-export default App;
+export default withRouter(connect(null)(App));

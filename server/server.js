@@ -86,7 +86,7 @@ passport.deserializeUser((id, done) =>
 app.get('/auth', passport.authenticate('auth0'));
 
 app.get('/auth/callback', passport.authenticate('auth0',{
-    successRedirect: 'http://localhost:3000/#/home',
+    successRedirect: 'http://localhost:3000/#/',
     failureRedirect: 'http://localhost:3000/'
 }));
 
@@ -96,10 +96,10 @@ app.get('/auth/me', (req, res) =>
     {
         res.status(200).send(req.user);
     }
-    else
-    {
-        res.status(401).send('No one logged in');    
-    }
+    // else
+    // {
+    //     res.status(401).send('No one logged in');    
+    // }
 })
 app.get('/logout', (req, res) =>
 {

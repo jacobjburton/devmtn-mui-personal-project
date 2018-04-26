@@ -54,13 +54,13 @@ export default class TimeStandards extends React.Component
                         <MenuItem value={allAmerica} primaryText='2017-18 All-America' />
                         <MenuItem value={sectionals} primaryText='2018 Sectionals' />
                         <MenuItem value={futures} primaryText='2018 Futures' />
-                        <MenuItem value={p66Nats} primaryText='2018 Phillips 66 Nationals' />
                         <MenuItem value={winterJrNats} primaryText='2018 Winter Jr. Nationals' />
-                        <MenuItem value={winterSrNats} primaryText='2018 Winter Sr. Nationals' />            
+                        <MenuItem value={winterSrNats} primaryText='2018 Winter Sr. Nationals' />
+                        <MenuItem value={p66Nats} primaryText='2018 Phillips 66 Nationals' />            
                     </DropDownMenu> 
-                    <div>
+                    {/* <div> */}
                         {tableDisplay}
-                    </div>
+                    {/* </div> */}
                 </div>
             </div>
         )
