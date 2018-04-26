@@ -8,7 +8,6 @@ import TimeStandards from './components/TimeStandards/TimeStandards';
 
 export default (
     <Switch>
-        {/* <Route exact path='/' component={Auth}/> */}
         <Route exact path='/' component={Home}/>
         <Route path='/addevent' component={AddEvent}/>
         <Route path='/timestandards' component={TimeStandards}/>
