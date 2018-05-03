@@ -1,0 +1,9 @@
+.textField
+{
+    background-color: #303030;
+    height: 40px;
+    display: grid;
+    float: right;
+    padding: 10px;
+    border-radius: 10px;
+}

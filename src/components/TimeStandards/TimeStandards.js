@@ -58,9 +58,9 @@ export default class TimeStandards extends React.Component
                         <MenuItem value={winterSrNats} primaryText='2018 Winter Sr. Nationals' />
                         <MenuItem value={p66Nats} primaryText='2018 Phillips 66 Nationals' />            
                     </DropDownMenu> 
-                    {/* <div> */}
+                    <div className='tableDisplay'>
                         {tableDisplay}
-                    {/* </div> */}
+                    </div>
                 </div>
             </div>
         )

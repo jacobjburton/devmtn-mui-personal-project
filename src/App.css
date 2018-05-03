@@ -20,8 +20,13 @@
 
 .body
 {
-  height: 100vh;
+  height: 100%;
 
+}
+
+.tableDisplay
+{
+  height: 100vh;
 }
 
 .App-title {

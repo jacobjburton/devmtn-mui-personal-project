@@ -38,7 +38,7 @@ class Navbar extends React.Component
         return (
             <div className="Navbar">
                 <AppBar
-                    title="SwimSwamSwum "
+                    title="SwimSwamSwum"
                     iconElementRight={
                         <div className="loginAndLogo">
                             <img src={require('../../files/img/swimming-icon-23788.png')}       alt="logo" className="logo"
