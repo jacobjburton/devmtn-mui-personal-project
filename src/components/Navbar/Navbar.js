@@ -35,6 +35,8 @@ class Navbar extends React.Component
                 label="Login" className="button"
             />;
         
+        
+        
         return (
             <div className="Navbar">
                 <AppBar

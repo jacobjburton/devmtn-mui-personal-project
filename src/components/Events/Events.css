@@ -7,3 +7,16 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+.body
+{
+    height: 100vh;
+}
+
+.table
+{
+    background-color: #303030;
+    color: white;
+    font-size: 28px;
+
+}

@@ -5,7 +5,8 @@ const express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
-    Auth0Strategy = require('passport-auth0');
+    Auth0Strategy = require('passport-auth0'),
+    controller = require('./controller');
 
 
 const app = express();
@@ -111,6 +112,9 @@ massive(CONNECTION_STRING).then(db =>
 {
     app.set('db', db);
 });
+
+
+app.get('/api/events', controller.getEvents);
 
 
 app.listen(SERVER_PORT, () => 
