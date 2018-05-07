@@ -114,7 +114,9 @@ massive(CONNECTION_STRING).then(db =>
 });
 
 
-app.get('/api/events', controller.getEvents);
+app.get('/api/events/:username', controller.getEvents);
+app.get('/api/getSliderImages', controller.getSliderImages);
+
 
 
 app.listen(SERVER_PORT, () => 

@@ -41,3 +41,11 @@ where (race.rName) = lower('50 yard freestyle')
 -- 200_Breastroke
 -- 100_Butterfly
 -- 200_Butterfly
+
+
+insert into sliderimages (img_url)
+values ('https://s3-us-west-2.amazonaws.com/devmtn-personal-project-images/swim1.png'),
+('https://s3-us-west-2.amazonaws.com/devmtn-personal-project-images/swim2.png'),
+('https://s3-us-west-2.amazonaws.com/devmtn-personal-project-images/swim3.png'),
+('https://s3-us-west-2.amazonaws.com/devmtn-personal-project-images/swim4.png'),
+('https://s3-us-west-2.amazonaws.com/devmtn-personal-project-images/swim6.png')

@@ -3,10 +3,10 @@ import './Events.css';
 //import Paper from 'material-ui/Paper';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-import TextField from 'material-ui/TextField';
-import axios from 'axios';
-// import { connect } from 'react-redux';
-// import { getEventData } from '../../redux/reducer';
+//import TextField from 'material-ui/TextField';
+//import axios from 'axios';
+import { connect } from 'react-redux';
+import { getEventData } from '../../redux/reducer';
 
 const  dropdownStyle = 
 {
@@ -27,26 +27,29 @@ const  dropdownStyle =
 
 class Events extends Component
 {
-    constructor()
-    {
-        super();
+    // constructor()
+    // {
+    //     super();
 
-        this.state =
-        {
-            events: []
-        }
-    }
+    //     this.state =
+    //     {
+    //         //events: []
+    //     }
+    // }
 
 
     componentDidMount()
     {
-        console.log('firing?`')
-        axios.get('/api/events').then(res => 
-        {   
-            console.log('getting here?')
-            this.setState({ events: res.data })
-            console.log(this.state.events);
-        });
+        console.log('firing?', this.props.user)
+        if (this.props.user)
+        {
+            this.props.getEventData(this.props.user.username);
+        }
+        else
+        {
+            alert('Please log in to see events');
+            this.props.history.push('/');
+        }
     }
 
     
@@ -57,68 +60,64 @@ class Events extends Component
 
         return (
             <div className="body">
-                <div className="textField">
-                    <TextField
-                        hintText="Search by Name"
-                        
-                    />
-                    <DropDownMenu 
-                        //value={this.state.value}
-                        //onChange={this.handleChange}
-                        style={dropdownStyle.customSize}
-                        //autoWidth={false}
-                        className="menu"
-                    >
-                        <MenuItem value={''} primaryText='Select Data Table' />          
-                        <MenuItem value={''} primaryText='' />          
-                    </DropDownMenu>
+            
+                <DropDownMenu 
+                    //value={this.state.value}
+                    //onChange={this.handleChange}
+                    style={dropdownStyle.customSize}
+                    //autoWidth={false}
+                    className="menu"
+                >
+                    <MenuItem value={''} primaryText='Select Data Table' />          
+                    <MenuItem value={''} primaryText='' />          
+                </DropDownMenu>
                     
-                </div>
-                {/* <div >
-                    <h4>
-                        Swimmer: {'   '} Event Name: {'   '} Event Date: {'   '}
-                        Event Format: {'   '} Race: {'   '} Time: {'   '}
-                    </h4>
-                </div> */}
+                
                 <table className='table'>
                     <thead>
-                        <tr>
-                            <th>Swimmer</th>
-                            <th>Event Name</th>
-                            <th>Event Date</th>
-                            <th>Event Format</th>
-                            <th>Race</th>
-                            <th>Time</th>    
+                        <tr className='th'>
+                            {/* <th className='header'>Swimmer</th> */}
+                            <th className='header'>Event Name</th>
+                            <th className='header'>Event Date</th>
+                            <th className='header'>Event Format</th>
+                            <th className='header'>Race</th>
+                            <th className='header'>Time</th>    
                        </tr>
                     </thead>   
-                    <tbody>{this.state.events.map((event, i) =>
+                    <tbody>{this.props.events.map((event, i) =>
                     {
                         return (
-                            <tr key={i}>
-                                    <td>{event.username}</td>
+                            <tr key={i} className='columns'>
+                                    {/* <td>{event.username}</td> */}
                                     <td>{event.mname}</td>
                                     <td>{event.mdate}</td>
                                     <td>{event.mformat}</td>
                                     <td>{event.rname}</td>
                                     <td>{event.rtime}</td>
+                                    <td>
+                                        <button>edit</button>
+                                    </td>
                             </tr>
                         );
                     })
                     }
                     </tbody>
                 </table>
-                {/* <Paper style={style} zDepth={5}/> */}
+                
             </div>
         )
     }
 }
 
-// function mapStateToProps(state)
-// {
-//     return (
-//     {
-//         events: state.events
-//     });
-// }
+function mapStateToProps(state)
+{
+    return (
+    {
+        user: state.user,
+        events: state.events
+    });
+}
 
-export default Events;
+
+//export default Events;
+export default connect(mapStateToProps, { getEventData })(Events);

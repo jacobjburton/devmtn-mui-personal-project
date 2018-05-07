@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:500');
+
 .textField
 {
     background-color: #303030;
@@ -16,7 +18,28 @@
 .table
 {
     background-color: #303030;
-    color: white;
-    font-size: 28px;
+    font-family: 'Oswald', sans-serif;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+}
 
+.th
+{
+    color: gray;
+    font-size: 24px;
+    text-decoration: underline;
+    text-shadow: 2px 2px black;
+}
+
+.header
+{
+    padding: 25px;
+}
+
+.columns
+{
+    color: white;
+    width: 20px;
+    font-size: 20px;
 }

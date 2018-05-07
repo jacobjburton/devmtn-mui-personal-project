@@ -24,3 +24,8 @@ create table if not exists race (
     rName varchar(20),
     rTime varchar(20)
 );
+
+create table if not exists sliderimages (
+    id serial primary key,
+    img_url text
+);
