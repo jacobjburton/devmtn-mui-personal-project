@@ -15,6 +15,13 @@ module.exports =
     
         db.get_slider_images().then(images => res.status(200).send(images))
         .catch(() => res.status(500).send());
+    },
+    getMeetNames: (req, res) =>
+    {
+        const db = req.app.get('db');
+        console.log(req.params)
+        db.get_meet_names(req.params.userid).then(meetnames => res.status(200).send(meetnames))
+        .catch(() => res.status(500).send());
     }
     
         

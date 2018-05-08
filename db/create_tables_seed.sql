@@ -11,7 +11,7 @@ create table if not exists meets (
     mDate varchar(20),
     mName varchar(40),
     mFormat varchar(20),
-    athleteId integer references users (id) 
+    athleteId integer references users (id)
 );
 
 create table if not exists events (

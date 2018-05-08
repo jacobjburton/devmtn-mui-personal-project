@@ -4,12 +4,14 @@ const initialState =
 {
     user: null,
     events: [],
-    sliderImages: []
+    sliderImages: [],
+    meets: []
 }
 
 const GET_USER_INFO = 'GET_USER_INFO',
     GET_EVENT_INFO = 'GET_EVENT_INFO',
-    GET_SLIDER_IMAGES = 'GET_SLIDER_IMAGES';
+    GET_SLIDER_IMAGES = 'GET_SLIDER_IMAGES',
+    GET_MEET_NAMES = 'GET_MEET_NAMES';
 
 
 export function getUser()
@@ -37,6 +39,20 @@ export function getEventData(user)
         type: GET_EVENT_INFO,
         payload: events
     });
+}
+
+export function getMeetNames(userid)
+{
+    let meets = axios.get('api/meetnames/' + userid).then(res =>
+    {
+        console.log(res.data)
+        return res.data;
+    })
+    return (
+    {
+        type: GET_MEET_NAMES,
+        payload: meets
+    })
 }
 
 export function getSliderImages()
@@ -71,7 +87,8 @@ export default function reducer(state = initialState, action)
             
             //console.log(action.payload);
             return Object.assign({}, state, {sliderImages: imageUrlArr});
-        
+        case GET_MEET_NAMES + '_FULFILLED':
+            return Object.assign({}, state, {meets: action.payload})
         default:
             return state;
     }
