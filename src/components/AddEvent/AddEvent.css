@@ -3,17 +3,26 @@
     display: inline-block;
 }
 
+.boxTitle
+{
+    color: gray;
+    text-decoration: underline;
+    text-shadow: 2px 2px black;
+}
+
 .addMeetBox
 {
-    background-color: grey;
+    background-color: #303030;
     height: 40vh;
     width: 50vw;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 .addRaceBox
 {
-    background-color: grey;
+    background-color: #303030;
     height: 40vh;
     width: 50vw;
+    border-radius: 10px;
 }

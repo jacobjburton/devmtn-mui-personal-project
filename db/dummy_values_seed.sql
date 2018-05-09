@@ -41,6 +41,8 @@ where (race.rName) = lower('50 yard freestyle')
 -- 200_Breastroke
 -- 100_Butterfly
 -- 200_Butterfly
+-- 200_IM
+-- 400_IM
 
 
 insert into sliderimages (img_url)

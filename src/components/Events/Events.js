@@ -43,7 +43,7 @@ class Events extends Component
         console.log('firing?', this.props.user)
         if (this.props.user)
         {
-            this.props.getEventData(this.props.user.username);
+            this.props.getEventData(this.props.user.id);
         }
         else
         {
@@ -69,7 +69,7 @@ class Events extends Component
                     className="menu"
                 >
                     <MenuItem value={''} primaryText='Select Data Table' />          
-                    <MenuItem value={''} primaryText='' />          
+                    {/* <MenuItem value={''} primaryText='' />           */}
                 </DropDownMenu>
                     
                 
@@ -95,12 +95,12 @@ class Events extends Component
                                     <td>{event.rname}</td>
                                     <td>{event.rtime}</td>
                                     <td>
-                                        <button>edit</button>
+                                    <button>edit</button>
+                                    <button>delete</button>
                                     </td>
                             </tr>
                         );
-                    })
-                    }
+                    })}
                     </tbody>
                 </table>
                 
