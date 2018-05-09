@@ -7,7 +7,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import { getMeetNames, addNewMeet } from '../../redux/reducer';
+import { getMeetNames, addNewMeet, addNewRace } from '../../redux/reducer';
 import moment from 'moment';
 
 const style = {
@@ -24,8 +24,7 @@ class AddEvent extends Component
         {
             date: null,
             formattedDate: '',
-            format1: null,
-            format2: null,
+            format: null,
             newEventName: '',
             eventName: '',
             raceName: '',
@@ -34,10 +33,10 @@ class AddEvent extends Component
         };
 
         this.dateChange = this.dateChange.bind(this);
-        this.format1Change = this.format1Change.bind(this);
+        this.formatChange = this.formatChange.bind(this);
         this.newEventChange = this.newEventChange.bind(this);
         this.addMeetClick = this.addMeetClick.bind(this);
-        this.format2Change = this.format2Change.bind(this);
+       // this.format2Change = this.format2Change.bind(this);
         this.eventChange = this.eventChange.bind(this);
         this.raceChange = this.raceChange.bind(this);
         this.timeChange = this.timeChange.bind(this);
@@ -47,7 +46,7 @@ class AddEvent extends Component
     {
         if (this.props.user)
         {
-            console.log('userid', this.props.user.id)
+            //console.log('userid', this.props.user.id)
             this.props.getMeetNames(this.props.user.id);
         }
         else
@@ -93,55 +92,82 @@ class AddEvent extends Component
 
     newEventChange = (event, value) => this.setState({newEventName: value});
 
-    format1Change = (event, index, value) => this.setState({format1: value});
+    formatChange = (event, index, value) => this.setState({format: value});
     
-    format2Change = (event, index, value) => this.setState({format2: value});
+   // format2Change = (event, index, value) => this.setState({format2: value});
 
     addMeetClick()
     {
                                                              
-        let { formattedDate, newEventName, format1 } = this.state;
+        let { formattedDate, newEventName, format } = this.state;
         let { id } = this.props.user;
         //formatDate(date);
-        console.log(formattedDate, newEventName, format1, id)
-        this.props.addNewMeet(formattedDate, newEventName, format1, id);
+        console.log(formattedDate, newEventName, format, id)
+        this.props.addNewMeet(formattedDate, newEventName, format, id);
+        this.setState(
+        {
+            formattedDate: '',
+            date: null,
+            newEventName: '',
+            format: ''
+        })
     }
 
-    eventChange = (event, index, value) => this.setState({eventName: value});
-   
-    raceChange = (event, index, value) => this.setState({raceName: value});
+    addRaceClick()
+    {
+        let { raceName, raceTime } = this.state;
+        let { id } = this.props.user;
 
-    timeChange = (event, index, value) => this.setState({raceTime: value});
+        this.props.addNewRace(raceName, raceTime, id, )
+    }
+
+    eventChange = (event, index, value) => 
+    {
+        console.log(value)
+        this.setState({eventName: value});
+    }
+   
+    raceChange = (event, index, value) => 
+    {   
+        console.log(value);
+        this.setState({raceName: value});
+    }
+
+    timeChange = (event, value) => 
+    {   
+        console.log(value)
+        this.setState({raceTime: value});
+    }
 
     render()
     {   
-        var formatLabel = '';
-        let {formattedDate, format1, newEventName} = this.state;
+        var formatLabel = '';    
         
-        if (this.props.user)
+        if(this.state.eventName)
         {
+            //console.log(this.props.meets)
             
-            console.log(formattedDate, newEventName, format1, this.props.user.id);
-        }
-        
-        
-        if(this.state.format2)
-        {
-            
-            if (this.state.format2 === "SCY")
+            //console.log(this.props.meets.length)
+            for (var i = 0; i < this.props.meets.length; i++)
             {
-                formatLabel = "Yard";
-            }
-            else 
-            {
-                formatLabel = "Meter";
+                //console.log(this.props.meets[i].mname)
+                //console.log(this.props.meets[i].mformat)
+
+                if (this.props.meets[i].mname === this.state.eventName && this.props.meets[i].mformat === "SCY")
+                {
+                    formatLabel = "yard";
+                }
+                else if (this.props.meets[i].mname === this.state.eventName && this.props.meets[i].mformat === "LCM")
+                {
+                    formatLabel = "meter";
+                }
             }
         }
 
         let menuEvents = this.props.meets.map((event, i) => 
         {
             return (
-                <MenuItem key={i} value={event.mname} primaryText={`${event.mname}`}/> 
+                <MenuItem key={i} value={event.mname} primaryText={`${event.mname}, ${event.mformat}`}/> 
             )
         });
         return (
@@ -172,6 +198,7 @@ class AddEvent extends Component
                     <RaisedButton 
                         label="Add Event" 
                         style={style}
+                        primary={true}
                         onClick={this.addMeetClick}
                     />
                 </div>
@@ -184,33 +211,25 @@ class AddEvent extends Component
                     >
                         {/* <MenuItem value={1} primaryText={''}/> */}
                         {menuEvents}
-                    </SelectField> 
-                    <SelectField
-                        floatingLabelText="Event Format"
-                        value={this.state.format2}
-                        onChange={this.format2Change}
-                    >
-                        {/* <MenuItem value={1} primaryText={''}/> */}
-                        <MenuItem value={'SCY'} primaryText={'SCY'}/>
-                        <MenuItem value={'LCM'} primaryText={'LCM'}/>
                     </SelectField>
+                    
                     <SelectField
                         floatingLabelText="Race"
                         value={this.state.raceName}
                         onChange={this.raceChange}
                     >
-                        <MenuItem value={`50 ${formatLabel} Freestyle`} primaryText={`50 ${formatLabel} Freestyle`}/>
-                        <MenuItem value={`100 ${formatLabel} Freestyle`} primaryText={`100 ${formatLabel} Freestyle`}/>
-                        <MenuItem value={`200 ${formatLabel} Freestyle`} primaryText={`200 ${formatLabel} Freestyle`}/>
-                        <MenuItem value={`500 ${formatLabel} Freestyle`} primaryText={`500 ${formatLabel} Freestyle`}/>
-                        <MenuItem value={`1000 ${formatLabel} Freestyle`} primaryText={`1000 ${formatLabel} Freestyle`}/>
-                        <MenuItem value={`1650 ${formatLabel} Freestyle`} primaryText={`1650 ${formatLabel} Freestyle`}/>
-                        <MenuItem value={`100 ${formatLabel} Backstroke`} primaryText={`100 ${formatLabel} Backstroke`}/>
-                        <MenuItem value={`200 ${formatLabel} Backstroke`} primaryText={`200 ${formatLabel} Backstroke`}/>
-                        <MenuItem value={`100 ${formatLabel} Breastroke`} primaryText={`100 ${formatLabel} Breastroke`}/>
-                        <MenuItem value={`200 ${formatLabel} Breastroke`} primaryText={`200 ${formatLabel} Breastroke`}/>
-                        <MenuItem value={`100 ${formatLabel} Butterfly`} primaryText={`100 ${formatLabel} Butterfly`}/>
-                        <MenuItem value={`200 ${formatLabel} Butterfly`} primaryText={`200 ${formatLabel} Butterfly`}/>
+                        <MenuItem value={`50 ${formatLabel} freestyle`} primaryText={`50 ${formatLabel} freestyle`}/>
+                        <MenuItem value={`100 ${formatLabel} freestyle`} primaryText={`100 ${formatLabel} freestyle`}/>
+                        <MenuItem value={`200 ${formatLabel} freestyle`} primaryText={`200 ${formatLabel} freestyle`}/>
+                        <MenuItem value={`500 ${formatLabel} freestyle`} primaryText={`500 ${formatLabel} freestyle`}/>
+                        <MenuItem value={`1000 ${formatLabel} freestyle`} primaryText={`1000 ${formatLabel} freestyle`}/>
+                        <MenuItem value={`1650 ${formatLabel} freestyle`} primaryText={`1650 ${formatLabel} freestyle`}/>
+                        <MenuItem value={`100 ${formatLabel} backstroke`} primaryText={`100 ${formatLabel} backstroke`}/>
+                        <MenuItem value={`200 ${formatLabel} backstroke`} primaryText={`200 ${formatLabel} backstroke`}/>
+                        <MenuItem value={`100 ${formatLabel} breastroke`} primaryText={`100 ${formatLabel} breastroke`}/>
+                        <MenuItem value={`200 ${formatLabel} breastroke`} primaryText={`200 ${formatLabel} breastroke`}/>
+                        <MenuItem value={`100 ${formatLabel} butterfly`} primaryText={`100 ${formatLabel} butterfly`}/>
+                        <MenuItem value={`200 ${formatLabel} butterfly`} primaryText={`200 ${formatLabel} butterfly`}/>
                         <MenuItem value={`200 ${formatLabel} IM`} primaryText={`200 ${formatLabel} IM`}/>
                         <MenuItem value={`400 ${formatLabel} IM`} primaryText={`400 ${formatLabel} IM`}/>
                     </SelectField>
@@ -219,6 +238,12 @@ class AddEvent extends Component
                         floatingLabelFixed={true}
                         value={this.state.raceTime}
                         onChange={this.timeChange}
+                    />
+                    <RaisedButton 
+                        label="Add Race"
+                        primary={true} 
+                        style={style}
+                        onClick={this.addRaceClick}
                     />
                 </div>
             </div>
@@ -235,4 +260,4 @@ function mapStateToProps(state)
     });
 }
 
-export default connect(mapStateToProps, { getMeetNames, addNewMeet })(AddEvent);
+export default connect(mapStateToProps, { getMeetNames, addNewMeet, addNewRace })(AddEvent);

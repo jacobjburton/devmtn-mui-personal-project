@@ -118,6 +118,7 @@ app.get('/api/events/:userid', controller.getEvents);
 app.get('/api/getSliderImages', controller.getSliderImages);
 app.get('/api/meetNames/:userid', controller.getMeetNames);
 app.post('/api/addNewMeet/', controller.addNewMeet);
+app.post('/api/addNewRace/', controller.addNewRace);
 
 
 app.listen(SERVER_PORT, () => 

@@ -12,7 +12,8 @@ const GET_USER_INFO = 'GET_USER_INFO',
     GET_EVENT_INFO = 'GET_EVENT_INFO',
     GET_SLIDER_IMAGES = 'GET_SLIDER_IMAGES',
     GET_MEET_NAMES = 'GET_MEET_NAMES',
-    ADD_NEW_MEET = 'ADD_NEW_MEET';
+    ADD_NEW_MEET = 'ADD_NEW_MEET',
+    ADD_NEW_RACE = 'ADD_NEW_RACE';
 
 
 export function getUser()
@@ -46,7 +47,7 @@ export function getMeetNames(userid)
 {
     let meets = axios.get('/api/meetNames/' + userid).then(res =>
     {
-        console.log(res.data)
+       // console.log(res.data)
         return res.data;
     })
     return (
@@ -76,7 +77,20 @@ export function addNewMeet(date, name, format, athleteid)
     return (
     {
         type: ADD_NEW_MEET,
-        payload: axios.post('/api/addNewMeet/', {date, name, format, athleteid}).then(res => {
+        payload: axios.post('/api/addNewMeet/', {date, name, format, athleteid}).then(res => 
+        {
+            return res.data;
+        })
+    });
+}
+
+export function addNewRace(name, time, meetId, raceId)
+{
+    return (
+    {    
+        type: ADD_NEW_RACE,
+        payload: axios.post('/api/addNewRace/', {name, time, meetId, raceId}).then(res =>
+        {
             return res.data;
         })
     });
@@ -86,8 +100,10 @@ export default function reducer(state = initialState, action)
 {
     switch (action.type)
     {
-        case ADD_NEW_MEET + 'FULFILLED':
-            return Object.assign({}, state, {meets: action.payload})
+        case ADD_NEW_RACE + '_FULFILLED':
+            return Object.assign({}, state);
+        case ADD_NEW_MEET + '_FULFILLED':
+            return Object.assign({}, state, {meets: action.payload});
         case GET_USER_INFO + '_FULFILLED':
             return Object.assign({}, state, {user: action.payload});
         case GET_EVENT_INFO + '_FULFILLED':

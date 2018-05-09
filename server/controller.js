@@ -31,6 +31,13 @@ module.exports =
 
         db.add_new_meet([date, name, format, athleteid]).then(() => res.status(200).send())
         .catch(() => res.status(500).send());
+    },
+    addNewRace: (req, res, next) =>
+    {
+        const db = req.app.get('db');
+        
+        db.add_new_race([raceName]).then(() => res.status(200).send())
+        .catch(() => res.status(500).send());
     }
     
         

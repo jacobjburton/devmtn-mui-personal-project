@@ -21,6 +21,21 @@ values (2, 5),
 (2, 7), 
 (2, 8);
 
+insert into raceEvents (eventDate, eventFormat, raceName, raceTime, athleteId)
+values ('08/05/17', 'LCM', '50 meter freestyle', '24.50', 2),
+('08/05/17', 'LCM', '100 meter freestyle', '54.21', 2),
+('08/05/17', 'LCM', '200 meter freestyle', '1:57.21', 2),
+('10/29/17', 'SCY', '50 yard freestyle', '21.26', 2),
+('10/29/17', 'SCY', '100 yard freestyle', '46.61', 2),
+('10/29/17', 'SCY', '100 yard breastroke', '58.41', 2),
+('10/30/17', 'SCY', '200 yard IM', '1:55.69', 2),
+('02/12/18', 'SCY', '50 yard freestyle', '21.94', 2),
+('02/12/18', 'SCY', '100 yard freestyle', '47.11', 2),
+('02/12/18', 'SCY', '100 yard breastroke', '58.91', 2),
+('04/01/18', 'SCY', '50 yard freestyle', '22.04', 2),
+('04/01/18', 'SCY', '100 yard freestyle', '48.01', 2),
+('04/01/18', 'SCY', '100 yard breastroke', '59.11', 2)
+
 
 select users.username, users.gender, meets.mName, meets.mDate, meets.mFormat, race.rName, race.rTime from users
 left outer join meets on meets.athleteId = users.id
@@ -37,7 +52,7 @@ where (race.rName) = lower('50 yard freestyle')
 -- 1650_Freestyle
 -- 100_Backstroke
 -- 200_Backstroke
--- 100_Breastroke 
+-- 100_Breastroke   
 -- 200_Breastroke
 -- 100_Butterfly
 -- 200_Butterfly
