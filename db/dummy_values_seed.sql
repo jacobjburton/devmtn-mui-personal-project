@@ -37,12 +37,10 @@ values ('08/05/17', 'LCM', '50 meter freestyle', '24.50', 2),
 ('04/01/18', 'SCY', '100 yard breastroke', '59.11', 2)
 
 
-select users.username, users.gender, meets.mName, meets.mDate, meets.mFormat, race.rName, race.rTime from users
-left outer join meets on meets.athleteId = users.id
-left outer join events on meets.mId = events.mId
-left outer join race on events.rId = race.rId
-where (race.rName) = lower('50 yard freestyle')
-
+select users.username, raceevents.eventdate, raceevents.eventformat, raceevents.raceName, raceevents.raceTime from users
+left outer join raceevents on raceevents.athleteId = users.id
+where users.id = raceevents.athleteid and raceTime is not null and eventformat = 'SCY'
+order by raceevents.racename, raceevents.eventdate
 
 -- 50_Freestyle
 -- 100_Freestyle,

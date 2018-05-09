@@ -95,8 +95,8 @@ class Events extends Component
                                     <td>{event.rname}</td>
                                     <td>{event.rtime}</td>
                                     <td>
-                                    <button>edit</button>
-                                    <button>delete</button>
+                                        <button>edit</button>
+                                        <button>delete</button>
                                     </td>
                             </tr>
                         );

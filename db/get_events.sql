@@ -1,6 +1,4 @@
-select users.username, meets.mName, meets.mDate, meets.mFormat, race.rName, race.rTime from users
-left outer join meets on meets.athleteId = users.id
-left outer join events on meets.mId = events.mId
-left outer join race on events.rId = race.rId
-where users.id = $1 and rTime is not null 
-order by race.rName, meets.mDate
+select users.username, raceevents.eventdate, raceevents.eventformat, raceevents.raceName, raceevents.raceTime from users
+left outer join raceevents on raceevents.athleteId = users.id
+where users.id = $1 and raceTime is not null and eventformat = 'SCY'
+order by raceevents.racename, raceevents.eventdate
