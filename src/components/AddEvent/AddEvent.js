@@ -40,6 +40,7 @@ class AddEvent extends Component
         this.eventChange = this.eventChange.bind(this);
         this.raceChange = this.raceChange.bind(this);
         this.timeChange = this.timeChange.bind(this);
+        this.addRaceClick = this.addRaceClick.bind(this);
     }
     
     componentDidMount()
@@ -101,7 +102,7 @@ class AddEvent extends Component
                                                              
         let { formattedDate, newEventName, format } = this.state;
         let { id } = this.props.user;
-        //formatDate(date);
+        
         console.log(formattedDate, newEventName, format, id)
         this.props.addNewMeet(formattedDate, newEventName, format, id);
         this.setState(
@@ -115,10 +116,20 @@ class AddEvent extends Component
 
     addRaceClick()
     {
-        let { raceName, raceTime } = this.state;
-        let { id } = this.props.user;
-
-        this.props.addNewRace(raceName, raceTime, id, )
+        let id = 0;
+        let { raceName, raceTime, eventName } = this.state;
+        
+        for (var i = 0; i < this.props.meets.length; i++)
+        {
+            if (this.props.meets[i].mname === eventName)
+            {
+                id = this.props.meets[i].mid;
+            }
+        }
+        
+        //let { mid } = this.props.meets;
+        console.log(raceName, raceTime, id);
+        this.props.addNewRace(raceName, raceTime, id)
     }
 
     eventChange = (event, index, value) => 
@@ -188,8 +199,8 @@ class AddEvent extends Component
                     />
                     <SelectField
                         floatingLabelText="Event Format"
-                        value={this.state.format1}
-                        onChange={this.format1Change}
+                        value={this.state.format}
+                        onChange={this.formatChange}
                     >
                         {/* <MenuItem value={1} primaryText={''}/> */}
                         <MenuItem value={'SCY'} primaryText={'SCY'}/>

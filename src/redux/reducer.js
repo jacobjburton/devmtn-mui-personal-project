@@ -84,12 +84,12 @@ export function addNewMeet(date, name, format, athleteid)
     });
 }
 
-export function addNewRace(name, time, meetId, raceId)
+export function addNewRace(name, time, meetId)
 {
     return (
     {    
         type: ADD_NEW_RACE,
-        payload: axios.post('/api/addNewRace/', {name, time, meetId, raceId}).then(res =>
+        payload: axios.post('/api/addNewRace/', {name, time, meetId}).then(res =>
         {
             return res.data;
         })

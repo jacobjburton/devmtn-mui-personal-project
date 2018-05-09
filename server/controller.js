@@ -35,9 +35,13 @@ module.exports =
     addNewRace: (req, res, next) =>
     {
         const db = req.app.get('db');
-        
-        db.add_new_race([raceName]).then(() => res.status(200).send())
-        .catch(() => res.status(500).send());
+        const { name, time, meetId } = req.body;
+        console.log(req.body)
+        db.add_new_race([name, time]).then((results) => 
+        {
+            console.log(results[0].rid)
+            db.add_new_event([meetId, results[0].rid]).then(() => res.status(200).send())
+        }).catch(() => res.status(500).send());
     }
     
         

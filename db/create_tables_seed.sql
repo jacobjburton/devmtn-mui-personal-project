@@ -30,11 +30,11 @@ create table if not exists sliderimages (
     img_url text
 );
 
-create table if not exists raceEvents (
-    id serial primary key,
-    eventDate varchar(20),
-    eventFormat varchar(10),
-    raceName varchar(40),
-    raceTime varchar(20),
-    athleteId integer references users (id)
-);
+-- create table if not exists raceEvents (
+--     id serial primary key,
+--     eventDate varchar(20),
+--     eventFormat varchar(10),
+--     raceName varchar(40),
+--     raceTime varchar(20),
+--     athleteId integer references users (id)
+-- );
