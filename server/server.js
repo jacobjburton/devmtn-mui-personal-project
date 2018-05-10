@@ -6,7 +6,8 @@ const express = require('express'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
     Auth0Strategy = require('passport-auth0'),
-    controller = require('./controller');
+    controller = require('./controller'),
+    path = require('path');
 
 
 const app = express();
@@ -20,7 +21,9 @@ const {
     CLIENT_ID,
     CLIENT_SECRET,
     CALLBACK_URL,
-    SESSION_SECRET
+    SESSION_SECRET,
+    SUCCESS_REDIRECT,
+    FAILURE_REDIRECT
 } = process.env;
 
 
@@ -31,10 +34,10 @@ app.use(session
     resave: false,
     saveUninitialized: true
 }));
-
+app.use(express.static(path.join(__dirname, '/../build')));
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(express.static(__dirname = '/../build'));
+
 
 passport.use(new Auth0Strategy(
 {
@@ -84,11 +87,11 @@ passport.deserializeUser((id, done) =>
     });
 });
 
-app.get('/auth', passport.authenticate('auth0'));
+app.get('/auth', (r,s,n)=>{console.log('dude');n()} , passport.authenticate('auth0'));
 
 app.get('/auth/callback', passport.authenticate('auth0',{
-    successRedirect: 'http://localhost:3000/#/',
-    failureRedirect: 'http://localhost:3000/'
+    successRedirect: SUCCESS_REDIRECT,
+    failureRedirect: FAILURE_REDIRECT
 }));
 
 app.get('/auth/me', (req, res) =>
@@ -105,12 +108,13 @@ app.get('/auth/me', (req, res) =>
 app.get('/logout', (req, res) =>
 {
     req.logOut();
-    res.redirect('http://localhost:3000'); 
+    res.redirect(FAILURE_REDIRECT); 
 });
 
 massive(CONNECTION_STRING).then(db => 
 {
     app.set('db', db);
+    console.log('db connected')
 });
 
 
@@ -119,6 +123,7 @@ app.get('/api/getSliderImages', controller.getSliderImages);
 app.get('/api/meetNames/:userid', controller.getMeetNames);
 app.post('/api/addNewMeet/', controller.addNewMeet);
 app.post('/api/addNewRace/', controller.addNewRace);
+app.delete('/api/deleteRace/:id', controller.deleteRace);
 
 
 app.listen(SERVER_PORT, () => 

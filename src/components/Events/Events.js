@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 //import TextField from 'material-ui/TextField';
 //import axios from 'axios';
 import { connect } from 'react-redux';
-import { getEventData } from '../../redux/reducer';
+import { getEventData, deleteRace } from '../../redux/reducer';
 
 const  dropdownStyle = 
 {
@@ -27,20 +27,18 @@ const  dropdownStyle =
 
 class Events extends Component
 {
-    // constructor()
-    // {
-    //     super();
+    constructor()
+    {
+        super();
 
-    //     this.state =
-    //     {
-    //         //events: []
-    //     }
-    // }
+        this.deleteRace = this.deleteRace.bind(this);
+        this.editRace = this.editRace.bind(this);
+    }
 
 
     componentDidMount()
     {
-        console.log('firing?', this.props.user)
+        //console.log('firing?', this.props.user)
         if (this.props.user)
         {
             this.props.getEventData(this.props.user.id);
@@ -52,7 +50,17 @@ class Events extends Component
         }
     }
 
-    
+    deleteRace(id)
+    {
+        console.log(id);
+        this.props.deleteRace(id);        
+    }
+
+    editRace()
+    {
+
+    }
+
     render()
     {
         // const { username, mName, mDate, mFormat, rName, rTime } = this.state.events;
@@ -86,6 +94,7 @@ class Events extends Component
                     </thead>   
                     <tbody>{this.props.events.map((event, i) =>
                     {
+                        console.log(event.rid)
                         return (
                             <tr key={i} className='columns'>
                                     {/* <td>{event.username}</td> */}
@@ -95,8 +104,12 @@ class Events extends Component
                                     <td>{event.rname}</td>
                                     <td>{event.rtime}</td>
                                     <td>
-                                    <button>edit</button>
-                                    <button>delete</button>
+                                        <button
+                                            onClick={this.editRace}
+                                        >edit</button>
+                                        <button
+                                            onClick={() => this.deleteRace(event.rid)}
+                                        >delete</button>
                                     </td>
                             </tr>
                         );
@@ -120,4 +133,4 @@ function mapStateToProps(state)
 
 
 //export default Events;
-export default connect(mapStateToProps, { getEventData })(Events);
+export default connect(mapStateToProps, { getEventData, deleteRace })(Events);

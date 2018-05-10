@@ -13,7 +13,8 @@ const GET_USER_INFO = 'GET_USER_INFO',
     GET_SLIDER_IMAGES = 'GET_SLIDER_IMAGES',
     GET_MEET_NAMES = 'GET_MEET_NAMES',
     ADD_NEW_MEET = 'ADD_NEW_MEET',
-    ADD_NEW_RACE = 'ADD_NEW_RACE';
+    ADD_NEW_RACE = 'ADD_NEW_RACE',
+    DELETE_RACE = 'DELETE_RACE';
 
 
 export function getUser()
@@ -60,10 +61,6 @@ export function getMeetNames(userid)
 export function getSliderImages()
 {
     
-    
-    
-    //console.log(images)
-    //console.log(imageUrlArr);
     return (
     {
         type: GET_SLIDER_IMAGES,
@@ -96,10 +93,24 @@ export function addNewRace(name, time, meetId)
     });
 }
 
+export function deleteRace(id)
+{
+    return (
+    {
+        type: DELETE_RACE,
+        payload: axios.delete(`/api/deleteRace/${id}`).then(res =>
+        {
+            return res.data;
+        })
+    });
+}
+
 export default function reducer(state = initialState, action)
 {
     switch (action.type)
     {
+        case DELETE_RACE + '_FULFILLED':
+            return Object.assign({}, state, {events: action.payload});
         case ADD_NEW_RACE + '_FULFILLED':
             return Object.assign({}, state);
         case ADD_NEW_MEET + '_FULFILLED':
@@ -115,8 +126,6 @@ export default function reducer(state = initialState, action)
             {
                 imageUrlArr.push(action.payload.data[i].img_url);
             }
-            
-            //console.log(action.payload);
             return Object.assign({}, state, {sliderImages: imageUrlArr});
         case GET_MEET_NAMES + '_FULFILLED':
             return Object.assign({}, state, {meets: action.payload})
