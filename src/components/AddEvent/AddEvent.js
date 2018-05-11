@@ -57,6 +57,11 @@ class AddEvent extends Component
         }
     }
 
+    componentDidUpdate(oldProps, newProps)
+    {
+
+    }
+
     dateChange = (event, date) => 
     {  
         var formattedDate = ''; 
@@ -105,13 +110,15 @@ class AddEvent extends Component
         
         console.log(formattedDate, newEventName, format, id)
         this.props.addNewMeet(formattedDate, newEventName, format, id);
+        
         this.setState(
         {
             formattedDate: '',
             date: null,
             newEventName: '',
             format: ''
-        })
+        });
+        //window.location.reload();
     }
 
     addRaceClick()
@@ -130,6 +137,12 @@ class AddEvent extends Component
         //let { mid } = this.props.meets;
         console.log(raceName, raceTime, id);
         this.props.addNewRace(raceName, raceTime, id)
+        this.setState(
+        {
+            raceName: '',
+            raceTime: '',
+            EventName: ''
+        });
     }
 
     eventChange = (event, index, value) => 
@@ -174,7 +187,7 @@ class AddEvent extends Component
                 }
             }
         }
-
+        
         let menuEvents = this.props.meets.map((event, i) => 
         {
             return (
@@ -214,6 +227,7 @@ class AddEvent extends Component
                     />
                 </div>
                 <div className='addRaceBox'>
+                    
                     <h2 className="boxTitle">Add Race</h2>
                     <SelectField
                         floatingLabelText="Meet"
@@ -267,7 +281,7 @@ function mapStateToProps(state)
     return (
     {
         user: state.user,
-        meets: state.meets
+        meets: state.meets || []
     });
 }
 

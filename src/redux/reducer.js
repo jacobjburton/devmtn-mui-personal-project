@@ -76,6 +76,7 @@ export function addNewMeet(date, name, format, athleteid)
         type: ADD_NEW_MEET,
         payload: axios.post('/api/addNewMeet/', {date, name, format, athleteid}).then(res => 
         {
+            console.log(res.data)
             return res.data;
         })
     });
