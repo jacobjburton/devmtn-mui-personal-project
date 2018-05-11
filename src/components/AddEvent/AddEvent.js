@@ -205,7 +205,7 @@ class AddEvent extends Component
                         onChange={this.newEventChange}
                     />
                     <DatePicker 
-                        hintText="Date of Event"
+                        hintText="Event Date"
                         value={this.state.date}
                         onChange={this.dateChange}
                         formatDate={(date) => moment(date).format('MM/DD/YY')}
