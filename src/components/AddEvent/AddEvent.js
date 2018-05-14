@@ -238,6 +238,7 @@ class AddEvent extends Component
                         floatingLabelText="Meet"
                         value={this.state.eventName}
                         onChange={this.eventChange}
+                        className="raceFields"
                     >
                         {/* <MenuItem value={1} primaryText={''}/> */}
                         {menuEvents}
@@ -247,6 +248,7 @@ class AddEvent extends Component
                         floatingLabelText="Race"
                         value={this.state.raceName}
                         onChange={this.raceChange}
+                        className="raceFields"
                     >
                         <MenuItem value={`50 ${formatLabel} freestyle`} primaryText={`50 ${formatLabel} freestyle`}/>
                         <MenuItem value={`100 ${formatLabel} freestyle`} primaryText={`100 ${formatLabel} freestyle`}/>
@@ -268,6 +270,7 @@ class AddEvent extends Component
                         floatingLabelFixed={true}
                         value={this.state.raceTime}
                         onChange={this.timeChange}
+                        className="raceFields"
                     />
                     <RaisedButton 
                         label="Add Race"
