@@ -7,8 +7,10 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     Auth0Strategy = require('passport-auth0'),
     controller = require('./controller'),
-    path = require('path');
+    path = require('path'),
+    client = require('twilio');
 
+    
 
 const app = express();
 app.use(bodyParser.json());
@@ -124,7 +126,7 @@ app.get('/api/meetNames/:userid', controller.getMeetNames);
 app.post('/api/addNewMeet/', controller.addNewMeet);
 app.post('/api/addNewRace/', controller.addNewRace);
 app.delete('/api/deleteRace/:id', controller.deleteRace);
-
+app.put('/api/editRace/:id', controller.editRace);
 
 app.listen(SERVER_PORT, () => 
 {

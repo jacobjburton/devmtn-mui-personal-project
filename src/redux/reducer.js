@@ -14,7 +14,8 @@ const GET_USER_INFO = 'GET_USER_INFO',
     GET_MEET_NAMES = 'GET_MEET_NAMES',
     ADD_NEW_MEET = 'ADD_NEW_MEET',
     ADD_NEW_RACE = 'ADD_NEW_RACE',
-    DELETE_RACE = 'DELETE_RACE';
+    DELETE_RACE = 'DELETE_RACE',
+    EDIT_RACE = 'EDIT_RACE';
 
 
 export function getUser()
@@ -106,10 +107,26 @@ export function deleteRace(id)
     });
 }
 
+export function editRace(id, race, time, userid)
+{
+    console.log(race, time)
+    return (
+    {
+        type: EDIT_RACE,
+        payload: axios.put(`/api/editRace/${id}`, {race, time, userid}).then(res =>
+        {
+            console.log(res.data)
+            return res.data;
+        })
+    });
+}
+
 export default function reducer(state = initialState, action)
 {
     switch (action.type)
     {
+        case EDIT_RACE +'_FULFILLED':
+            return Object.assign({}, state, {events: action.payload});
         case DELETE_RACE + '_FULFILLED':
             return Object.assign({}, state, {events: action.payload});
         case ADD_NEW_RACE + '_FULFILLED':

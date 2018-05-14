@@ -20,8 +20,35 @@
     background-color: #303030;
     font-family: 'Oswald', sans-serif;
     padding: 20px;
-    margin: 15px;
+    margin: auto;
     border-radius: 10px;
+    opacity: 0.9;
+}
+
+.editTable
+{
+    background-color: #303030;
+    font-family: 'Oswald', sans-serif;
+    padding: 20px;
+    margin: auto;
+    border-radius: 10px;
+    /* float: left; */
+    display: block;
+    width: 60vw;
+    margin-top: 20px;
+    opacity: 0.9;
+}
+
+.editButton
+{
+    margin-top: 200px;
+}
+
+.editFields
+{
+    /* float: left; */
+    
+    margin: 20px;
 }
 
 .th

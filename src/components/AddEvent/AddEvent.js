@@ -110,7 +110,7 @@ class AddEvent extends Component
         
         console.log(formattedDate, newEventName, format, id)
         this.props.addNewMeet(formattedDate, newEventName, format, id);
-        
+        alert("Meet Added");
         this.setState(
         {
             formattedDate: '',
@@ -137,11 +137,12 @@ class AddEvent extends Component
         //let { mid } = this.props.meets;
         console.log(raceName, raceTime, id);
         this.props.addNewRace(raceName, raceTime, id)
+        alert("Race Added");
         this.setState(
         {
             raceName: '',
             raceTime: '',
-            EventName: ''
+            eventName: ''
         });
     }
 
@@ -203,17 +204,20 @@ class AddEvent extends Component
                         floatingLabelFixed={true}
                         value={this.state.newEventName}
                         onChange={this.newEventChange}
+                        className="meetFields"
                     />
                     <DatePicker 
                         hintText="Event Date"
                         value={this.state.date}
                         onChange={this.dateChange}
                         formatDate={(date) => moment(date).format('MM/DD/YY')}
+                        className="meetFields"
                     />
                     <SelectField
                         floatingLabelText="Event Format"
                         value={this.state.format}
                         onChange={this.formatChange}
+                        className="meetFields"
                     >
                         {/* <MenuItem value={1} primaryText={''}/> */}
                         <MenuItem value={'SCY'} primaryText={'SCY'}/>
@@ -224,6 +228,7 @@ class AddEvent extends Component
                         style={style}
                         primary={true}
                         onClick={this.addMeetClick}
+                        className='meetFieldsButton'
                     />
                 </div>
                 <div className='addRaceBox'>
@@ -269,6 +274,7 @@ class AddEvent extends Component
                         primary={true} 
                         style={style}
                         onClick={this.addRaceClick}
+                        className='meetFieldsButton'
                     />
                 </div>
             </div>

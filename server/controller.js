@@ -42,7 +42,7 @@ module.exports =
         //console.log(req.body)
         db.add_new_race([name, time]).then((results) => 
         {
-            console.log(results[0].rid)
+            //console.log(results[0].rid)
             db.add_new_event([meetId, results[0].rid]).then(() => res.status(200).send()).catch((err)=>{
                 console.log(err)
                 res.status(500).send(err)
@@ -75,7 +75,17 @@ module.exports =
     },
     editRace: (req, res, next) =>
     {
+        const db = req.app.get('db');
+        const { id } = req.params;
+        const { race, time, userid } = req.body;
+        console.log(race, time, id, userid)
 
+        db.edit_race([id, race, time, userid]).then((events) => {
+            res.status(200).send(events)
+        }).catch((err) => {
+            console.log(err)
+            res.status(500).send(err)
+        });
     }
             
 }
