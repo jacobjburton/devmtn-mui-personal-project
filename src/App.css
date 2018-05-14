@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  /* background-color: #00BCD4; */
   background-image: url("./files/img/Stock-Swimming-Image-2.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -39,10 +40,10 @@
 
 .tableIMG
 {
-  height: 90vh;
+  height: 92vh;
   max-width: 95vw;
   border-radius: 5px 5px 5px 5px;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 
