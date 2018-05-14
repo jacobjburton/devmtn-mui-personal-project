@@ -18,13 +18,16 @@ class Home extends Component
         var settings = {
             dots: true,
             infinite: true,
-            speed: 1000,
+            speed: 2000,
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            centerMode: true,
-            //lazyLoad: true
-            
+            autoplaySpeed: 5000,
+            pauseOnHover: false,
+            pauseOnDotsHover: true,
+            arrows: true,
+            cssEase: 'linear',
+            initialSlide: 0
         };
         // console.log(this.props.sliderImages[0])
         // let img = <div></div>
