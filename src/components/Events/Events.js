@@ -142,16 +142,16 @@ class Events extends Component
 
     editRaceClick()
     {
-        if (this.state.editRaceCheck)
-        {
-            this.setState({editRaceCheck: !this.state.editRaceCheck})
-        }
-        else
-        {
+        // if (this.state.editRaceCheck)
+        // {
+        //     this.setState({editRaceCheck: !this.state.editRaceCheck})
+        // }
+        // else
+        // {
             let { raceNameChange, raceChangeTime, indexToEdit } = this.state;
             console.log(raceNameChange, raceChangeTime)
             this.props.editRace(this.props.events[indexToEdit].rid, raceNameChange, raceChangeTime, this.props.user.id);
-        }
+        // }
         this.setState(
         {
             editRaceCheck: !this.state.editRaceCheck,
